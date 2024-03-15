@@ -1,4 +1,5 @@
 import { k } from "./game.js"
+import { TILESIZE } from "./globals.js"
 import { getPlayer } from "./player.js"
 
 /**
@@ -32,8 +33,14 @@ export function loadKeyboardJumpAndRun() {
     player.play("idleRight")
   })
 
-  k.onKeyPress("space", () => {
+  k.onKeyPress("up", () => {
     player.doubleJump()
+  })
+  k.onKeyPress("space", () => {
+    player.speed *= 1.5
+  })
+  k.onKeyRelease("space", () => {
+    player.speed = 5 * TILESIZE
   })
 }
 

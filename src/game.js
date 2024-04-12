@@ -11,6 +11,8 @@ import kaboom from "kaboom"
  */
 import loadSprites from "./sprites.js"
 
+import { loadSounds } from "./sounds.js"
+
 /**
  * Wir können auch einzelne Variablen importieren.
  * Das können wir verwenden um globale Konstanten zu definieren, die wir
@@ -46,6 +48,8 @@ export const k = kaboom({
  */
 loadSprites()
 
+loadSounds()
+
 /**
  * Diese Funktion erstellt die generelle Spiellogik die in allen Levels gilt.
  *
@@ -70,6 +74,8 @@ export function addGeneralGameLogic() {
       heal.destroy()
     }
   })
+
+  k.play("backgroundMusic", { loop: true, volume: 0.5 })
 
   /**
    * Wenn der Spieler mit einem Hindernis kollidiert, wird dem Spieler so viel

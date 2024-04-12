@@ -27,4 +27,13 @@ k.scene("level-02", async () => {
     flower.destroy()
     player.hasFlower = true
   })
+
+  k.add([
+    k.sprite("background2"),
+    k.pos(k.width() / 2, k.height() / 2),
+    k.z(-100),
+    k.anchor("center"),
+    k.fixed(),
+    k.scale(16),
+  ])
 })

@@ -47,6 +47,15 @@ k.scene("level-01", async () => {
     k.go("level-02")
   })
 
+  k.add([
+    k.sprite("background"),
+    k.pos(k.width() / 2, k.height() / 2),
+    k.z(-100),
+    k.anchor("center"),
+    k.fixed(),
+    k.scale(16),
+  ])
+
   // Diese Funktion wird bei jedem Frame ausgeführt. Bei einem Jump'n'Run ist
   // es so das wenn der Spieler von einer PLattform stützt, dann hat man das
   // Spiel verloren. Man könnte hier auch anders darauf reagieren, zum

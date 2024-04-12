@@ -23,7 +23,7 @@ export default function loadSprites() {
       anims: {
         // Hier werden die verschiedenen Animationen definiert.
         runDown: { from: 0, to: 2, loop: true }, // Die Animation nach unten rennen, besteht aus den ersten 3 Kacheln. Die Animation soll sich wiederholen wenn sie durchlaufen ist.
-        idleDown: 1, // Ist es nur eine Kachel, kann diese direkt angegeben werden.
+        idleDown: 19, // Ist es nur eine Kachel, kann diese direkt angegeben werden.
         runLeft: { from: 3, to: 5, loop: true, speed: 10 }, // Die Geschwindigkeit der Animation kann auch verändert werden.
         idleLeft: 4,
         runRight: { from: 6, to: 8, loop: true },
@@ -46,5 +46,9 @@ export default function loadSprites() {
     tree: { x: 1 * TS, y: 1 * TS, width: TS, height: TS },
     cave: { x: 2 * TS, y: 1 * TS, width: TS, height: TS },
     wall: { x: 3 * TS, y: 1 * TS, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background.png", {
+    background: { x: 0, y: 0, width: TS, height: TS },
   })
 }

@@ -9,7 +9,7 @@ import { TILESIZE } from "./globals.js"
 export function wallJumpAndRun(x, y) {
   k.add([
     // Sagt welche Grafik verwendet werden soll.
-    k.sprite("wall"),
+    k.sprite("ground2"),
 
     // Sagt dem Spielobjekt das es eine Position auf der Spielkarte hat, und wo
     // diese ist. Die Spielposition wird mit der TILESIZE skaliert, damit alles
@@ -34,7 +34,7 @@ export function wallJumpAndRun(x, y) {
     // dann Interaktionen zwischen Spielelementen erstellt werden.
     // Zum Beispiel: onCollide("ground", "player", () => {Was soll passieren
     // wenn der Spieler den Boden berührt.})
-    "ground",
+    "ground2",
   ])
 }
 
@@ -62,9 +62,17 @@ export function mushroomJumpAndRun(x, y) {
 /**
  * Ein Spielobjekt Blume, das den Spieler heilt.
  */
-export function flowerJumpAndRun(x, y) {
+export function notesJumpAndRun(x, y) {
+  const originalTileSize = 32
+  const targetWidth = 80
+  const targetHeight = 48
+  const scale = Math.max(
+    targetWidth / originalTileSize,
+    targetHeight / originalTileSize,
+  )
+
   k.add([
-    k.sprite("flower"),
+    k.sprite("notes"),
     k.pos(k.vec2(x, y).scale(TILESIZE)),
     k.body({ isStatic: true }),
     k.area(),

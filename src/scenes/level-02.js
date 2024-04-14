@@ -36,4 +36,5 @@ k.scene("level-02", async () => {
     k.fixed(),
     k.scale(16),
   ])
+  k.play("backgroundMusic2", { loop: true, volume: 0.5 })
 })

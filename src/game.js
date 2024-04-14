@@ -75,8 +75,6 @@ export function addGeneralGameLogic() {
     }
   })
 
-  k.play("backgroundMusic", { loop: true, volume: 0.5 })
-
   /**
    * Wenn der Spieler mit einem Hindernis kollidiert, wird dem Spieler so viel
    * Schaden zugefügt, wie das Hindernis `dmgAmount` hat. Hat das Hindernis

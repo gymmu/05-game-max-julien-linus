@@ -63,4 +63,8 @@ export default function loadSprites() {
   k.loadSpriteAtlas("sprites/notes.png", {
     notes: { x: 0, y: 0, width: TS, height: TS },
   })
+
+  k.loadSpriteAtlas("sprites/bomb.png", {
+    bomb: { x: 0, y: 0, width: TS, height: TS },
+  })
 }

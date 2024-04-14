@@ -41,9 +41,9 @@ export function wallJumpAndRun(x, y) {
 /**
  * Ein Pilz Spielobjekt, das dem Spieler schaden zufügt.
  */
-export function mushroomJumpAndRun(x, y) {
+export function bombJumpAndRun(x, y) {
   k.add([
-    k.sprite("mushroom"),
+    k.sprite("bomb"),
     k.pos(k.vec2(x, y).scale(TILESIZE)),
     k.body({ isStatic: true }),
     k.area(),

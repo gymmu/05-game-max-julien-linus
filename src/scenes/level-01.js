@@ -2,7 +2,6 @@ import { k, addGeneralGameLogic } from "../game.js"
 import createPlayer from "../player.js"
 import { generateMapJumpAndRun } from "../map.js"
 import { loadKeyboardJumpAndRun } from "../keyboard.js"
-
 import "./level-02.js"
 import "./lose.js"
 

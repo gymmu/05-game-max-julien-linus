@@ -21,7 +21,7 @@ import "./lose.js"
 k.scene("level-01", async () => {
   // Wir stellen die Gravitation ein, damit es sich um ein Jump'n'Run-Spiel
   // handelt.
-  k.setGravity(1700)
+  k.setGravity(2200)
 
   // Wir erstellen den Spieler
   createPlayer()

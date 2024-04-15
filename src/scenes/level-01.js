@@ -66,4 +66,5 @@ k.scene("level-01", async () => {
       k.go("lose")
     }
   })
+  k.play("backgroundMusic", { loop: true, volume: 0.5 })
 })

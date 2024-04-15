@@ -45,7 +45,7 @@ export async function generateMapJumpAndRun(mapfile) {
       } else if (char === "o") {
         GameObjects.mushroomJumpAndRun(x, y)
       } else if (char === "f") {
-        GameObjects.flowerJumpAndRun(x, y)
+        GameObjects.notesJumpAndRun(x, y)
       } else if (char === "g") {
         GameObjects.goalJumpAndRun(x, y)
       }

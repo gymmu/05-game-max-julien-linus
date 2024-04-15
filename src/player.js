@@ -16,7 +16,6 @@ export default function createPlayer() {
     k.body(),
     k.area(),
     k.doubleJump(),
-
     // Gibt dem Spieler Lebenspunkte und die möglichkeit über die Funktionen
     // `hurt` und `heal` mit dem Spieler zu interagieren.
     k.health(100),

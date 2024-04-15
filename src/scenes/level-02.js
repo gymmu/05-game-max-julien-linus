@@ -3,6 +3,7 @@ import { generateMapJumpAndRun } from "../map.js"
 import { loadKeyboardJumpAndRun } from "../keyboard.js"
 
 import "./finish.js"
+import createPlayer from "../player.js"
 
 /**
  * Szene für das Level 2.
@@ -10,12 +11,17 @@ import "./finish.js"
  * Hier gibt es keine Gravitation, wir sind hier in einem RPG-Setting.
  */
 k.scene("level-02", async () => {
-  k.setGravity(2200)
-  loadKeyboardJumpAndRun()
+  if (k.getData("loadData") === true) {
+    k.setData("loadData", false)
+    k.setGravity(2200)
+    createPlayer()
+    addGeneralGameLogic()
+  }
+  k.setData("level", 2)
 
   await generateMapJumpAndRun("maps/level-02.txt")
 
-  addGeneralGameLogic()
+  loadKeyboardJumpAndRun()
 
   k.onCollide("player", "cave", (player) => {
     if (player.hasFlower === true) {
@@ -36,5 +42,13 @@ k.scene("level-02", async () => {
     k.fixed(),
     k.scale(16),
   ])
+
+  k.onUpdate(() => {
+    const player = k.get("player")[0]
+    if (player.pos.y > 720) {
+      k.go("lose")
+    }
+  })
+
   k.play("backgroundMusic2", { loop: true, volume: 0.5 })
 })

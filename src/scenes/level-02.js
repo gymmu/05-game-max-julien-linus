@@ -1,7 +1,7 @@
 import { k, addGeneralGameLogic } from "../game.js"
 import { generateMapJumpAndRun } from "../map.js"
 import { loadKeyboardJumpAndRun } from "../keyboard.js"
-
+import "./level-03.js"
 import "./finish.js"
 import createPlayer from "../player.js"
 
@@ -33,10 +33,9 @@ k.scene("level-02", async () => {
 
   k.setData("level", 2)
 
-  k.onCollide("player", "cave", (player) => {
-    if (player.hasFlower === true) {
-      k.go("finish")
-    }
+  k.onCollide("player", "goal", (player) => {
+    k.go("level-03")
+    music2.paused = true
   })
 
   k.onCollide("player", "flower", (player, flower) => {
@@ -57,8 +56,9 @@ k.scene("level-02", async () => {
     const player = k.get("player")[0]
     if (player.pos.y > 720) {
       k.go("lose")
+      music2.paused = true
     }
   })
 
-  k.play("backgroundMusic2", { loop: true, volume: 0.5 })
+  const music2 = k.play("backgroundMusic2", { loop: true, volume: 0.5 })
 })

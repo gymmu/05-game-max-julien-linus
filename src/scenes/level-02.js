@@ -14,14 +14,24 @@ k.scene("level-02", async () => {
   if (k.getData("loadData") === true) {
     k.setData("loadData", false)
     k.setGravity(2200)
+
+    // Wir erstellen den Spieler
     createPlayer()
+
+    // Hier laden wir die generelle Spiellogik. Also was passieren soll wenn
+    // der Spieler mit einem Objekt kollidiert.
     addGeneralGameLogic()
   }
-  k.setData("level", 2)
 
+  // Wir laden die Tasenbelegung für ein Jump'n'Run-Spiel.
+  loadKeyboardJumpAndRun()
+
+  // Hier lassen wir die Spielwelt erstellen.
+  // Wir müssen dieser Funktion auch den Spieler übergeben, damit die
+  // Position vom Spieler richtig gesetzt werden kann.
   await generateMapJumpAndRun("maps/level-02.txt")
 
-  loadKeyboardJumpAndRun()
+  k.setData("level", 2)
 
   k.onCollide("player", "cave", (player) => {
     if (player.hasFlower === true) {

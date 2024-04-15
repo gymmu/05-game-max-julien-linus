@@ -63,4 +63,23 @@ export default function loadSprites() {
   k.loadSpriteAtlas("sprites/notes.png", {
     notes: { x: 0, y: 0, width: TS, height: TS },
   })
+
+  k.loadSpriteAtlas("sprites/bomb.png", {
+    bomb: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/explosion.png", {
+    explosion: {
+      x: 0, // x-Koordinate vom Pixel wo das Sprite beginnt
+      y: 0, // y-Koordinate vom Pixel wo das Sprite beginnt
+      width: 6 * TS, // Die Breite des Sprites in Pixel
+      height: 1 * TS, //Höhe des Sprites in Pixel
+      sliceX: 6, // In 6 unterschiedliche Sprites horizontal aufgeteilt
+      sliceY: 1, // In 1 verschiedene Sprites vertikal aufgeteilt
+      anims: {
+        // die Animation formatieren
+        explosion: { from: 0, to: 5, loop: false, speed: 15 }, // Sprite 0 bis 5 wird mit 10 FPS wiederholt
+      },
+    },
+  })
 }

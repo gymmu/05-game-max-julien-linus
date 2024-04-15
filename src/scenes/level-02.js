@@ -1,8 +1,9 @@
 import { k, addGeneralGameLogic } from "../game.js"
 import { generateMapJumpAndRun } from "../map.js"
 import { loadKeyboardJumpAndRun } from "../keyboard.js"
-
+import "./level-03.js"
 import "./finish.js"
+import createPlayer from "../player.js"
 
 /**
  * Szene für das Level 2.
@@ -10,17 +11,31 @@ import "./finish.js"
  * Hier gibt es keine Gravitation, wir sind hier in einem RPG-Setting.
  */
 k.scene("level-02", async () => {
-  k.setGravity(2200)
+  if (k.getData("loadData") === true) {
+    k.setData("loadData", false)
+    k.setGravity(2200)
+
+    // Wir erstellen den Spieler
+    createPlayer()
+
+    // Hier laden wir die generelle Spiellogik. Also was passieren soll wenn
+    // der Spieler mit einem Objekt kollidiert.
+    addGeneralGameLogic()
+  }
+
+  // Wir laden die Tasenbelegung für ein Jump'n'Run-Spiel.
   loadKeyboardJumpAndRun()
 
+  // Hier lassen wir die Spielwelt erstellen.
+  // Wir müssen dieser Funktion auch den Spieler übergeben, damit die
+  // Position vom Spieler richtig gesetzt werden kann.
   await generateMapJumpAndRun("maps/level-02.txt")
 
-  addGeneralGameLogic()
+  k.setData("level", 2)
 
-  k.onCollide("player", "cave", (player) => {
-    if (player.hasFlower === true) {
-      k.go("finish")
-    }
+  k.onCollide("player", "goal", (player) => {
+    k.go("level-03")
+    music2.paused = true
   })
 
   k.onCollide("player", "flower", (player, flower) => {
@@ -36,5 +51,14 @@ k.scene("level-02", async () => {
     k.fixed(),
     k.scale(16),
   ])
-  k.play("backgroundMusic2", { loop: true, volume: 0.5 })
+
+  k.onUpdate(() => {
+    const player = k.get("player")[0]
+    if (player.pos.y > 720) {
+      k.go("lose")
+      music2.paused = true
+    }
+  })
+
+  const music2 = k.play("backgroundMusic2", { loop: true, volume: 0.5 })
 })

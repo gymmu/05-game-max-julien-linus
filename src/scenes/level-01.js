@@ -19,6 +19,7 @@ import "./lose.js"
  *
  */
 k.scene("level-01", async () => {
+  k.setData("level", 1)
   // Wir stellen die Gravitation ein, damit es sich um ein Jump'n'Run-Spiel
   // handelt.
   k.setGravity(2200)
@@ -44,6 +45,7 @@ k.scene("level-01", async () => {
   // kommen wir ins nächste Level.
   k.onCollide("player", "goal", () => {
     k.go("level-02")
+    music1.paused = true
   })
 
   k.add([
@@ -64,7 +66,8 @@ k.scene("level-01", async () => {
     const player = k.get("player")[0]
     if (player.pos.y > 720) {
       k.go("lose")
+      music1.paused = true
     }
   })
-  k.play("backgroundMusic", { loop: true, volume: 0.5 })
+  const music1 = k.play("backgroundMusic", { loop: true, volume: 0.5 })
 })

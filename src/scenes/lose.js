@@ -24,6 +24,14 @@ k.scene("lose", () => {
   ])
 
   k.onKeyPress("space", () => {
-    k.go("level-01")
+    if (k.getData("level") === 1) {
+      k.go("level-01")
+    } else if (k.getData("level") === 2) {
+      k.setData("loadData", true)
+      k.go("level-02")
+    } else if (k.getData("level") === 3) {
+      k.setData("loadData", true)
+      k.go("level-03")
+    }
   })
 })

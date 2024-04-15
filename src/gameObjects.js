@@ -48,6 +48,7 @@ export function bombJumpAndRun(x, y) {
     k.body({ isStatic: true }),
     k.area(),
     "obstacle",
+    "explosion",
     // Hier können wir zusätzliche Eigenschaften von einem Spielobjekt angeben.
     // Mit `isConsumable` könnten wir prüfen das dieses Objekt nur
     // aufgelesen wird, wenn der Spieler die Eigenschaft `kochen` erlernt

@@ -85,6 +85,16 @@ export function addGeneralGameLogic() {
     if (obstacle.isConsumable === true) {
       obstacle.destroy()
     }
+
+    const explosion = k.add([
+      k.sprite("explosion", { anim: "explosion" }),
+      k.pos(obstacle.pos.x, obstacle.pos.y),
+      k.scale(1.5),
+      "explosion",
+    ])
+    k.wait(0.6, () => {
+      explosion.destroy()
+    })
   })
 
   /** Wenn der Spieler geheilt wird, dann wird seine Geschwindigkeit für 1

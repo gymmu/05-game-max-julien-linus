@@ -45,6 +45,7 @@ k.scene("level-01", async () => {
   // kommen wir ins nächste Level.
   k.onCollide("player", "goal", () => {
     k.go("level-02")
+    music1.paused = true
   })
 
   k.add([

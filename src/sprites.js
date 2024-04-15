@@ -78,7 +78,7 @@ export default function loadSprites() {
       sliceY: 1, // In 1 verschiedene Sprites vertikal aufgeteilt
       anims: {
         // die Animation formatieren
-        explosion: { from: 0, to: 5, loop: false, speed: 10 }, // Sprite 0 bis 5 wird mit 10 FPS wiederholt
+        explosion: { from: 0, to: 5, loop: false, speed: 15 }, // Sprite 0 bis 5 wird mit 10 FPS wiederholt
       },
     },
   })

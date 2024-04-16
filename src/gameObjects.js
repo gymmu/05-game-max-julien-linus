@@ -60,6 +60,18 @@ export function bombJumpAndRun(x, y) {
   ])
 }
 
+export function taylorJumpAndRun(x, y) {
+  const scaleFactor = 3
+
+  k.add([
+    k.sprite("taylor"),
+    k.pos(k.vec2(x, 7.2).scale(TILESIZE)),
+    k.scale(scaleFactor),
+    k.body({ isStatic: true }),
+    k.area(),
+  ])
+}
+
 /**
  * Ein Spielobjekt Blume, das den Spieler heilt.
  */

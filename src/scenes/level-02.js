@@ -38,11 +38,6 @@ k.scene("level-02", async () => {
     music2.paused = true
   })
 
-  k.onCollide("player", "flower", (player, flower) => {
-    flower.destroy()
-    player.hasFlower = true
-  })
-
   k.add([
     k.sprite("background2"),
     k.pos(k.width() / 2, k.height() / 2),

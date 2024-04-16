@@ -48,6 +48,8 @@ export async function generateMapJumpAndRun(mapfile) {
         GameObjects.notesJumpAndRun(x, y)
       } else if (char === "g") {
         GameObjects.goalJumpAndRun(x, y)
+      } else if (char === "t") {
+        GameObjects.taylorJumpAndRun(x, y)
       }
     }
   }

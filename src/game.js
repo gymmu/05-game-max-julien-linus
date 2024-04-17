@@ -75,6 +75,10 @@ export function addGeneralGameLogic() {
     }
   })
 
+  k.onCollide("taylor", "player", (taylor, player) => {
+    player.hurt(taylor.dmgAmount)
+  })
+
   /**
    * Wenn der Spieler mit einem Hindernis kollidiert, wird dem Spieler so viel
    * Schaden zugefügt, wie das Hindernis `dmgAmount` hat. Hat das Hindernis

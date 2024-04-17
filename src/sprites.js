@@ -56,6 +56,10 @@ export default function loadSprites() {
     background2: { x: 0, y: 0, width: TS, height: TS },
   })
 
+  k.loadSpriteAtlas("sprites/background3.png", {
+    background3: { x: 0, y: 0, width: TS, height: TS },
+  })
+
   k.loadSpriteAtlas("sprites/wall.png", {
     ground2: { x: 0, y: 0, width: TS, height: TS },
   })
@@ -81,5 +85,9 @@ export default function loadSprites() {
         explosion: { from: 0, to: 5, loop: false, speed: 15 }, // Sprite 0 bis 5 wird mit 10 FPS wiederholt
       },
     },
+  })
+
+  k.loadSpriteAtlas("sprites/taylorSwift.png", {
+    taylor: { x: 6, y: 2, width: TS - 12, height: TS - 2 },
   })
 }

@@ -60,6 +60,22 @@ export function bombJumpAndRun(x, y) {
   ])
 }
 
+export function taylorJumpAndRun(x, y) {
+  const scaleFactor = 3
+
+  k.add([
+    k.sprite("taylor"),
+    k.pos(k.vec2(x, 8.3).scale(TILESIZE)),
+    k.scale(scaleFactor),
+    k.body({ isStatic: true }),
+    k.area(),
+    "taylor",
+    {
+      dmgAmount: 20,
+    },
+  ])
+}
+
 /**
  * Ein Spielobjekt Blume, das den Spieler heilt.
  */
@@ -75,7 +91,6 @@ export function notesJumpAndRun(x, y) {
   k.add([
     k.sprite("notes"),
     k.pos(k.vec2(x, y).scale(TILESIZE)),
-    k.body({ isStatic: true }),
     k.area(),
     "heal",
     {
@@ -122,7 +137,7 @@ export function stoneRPG(x, y) {
   k.add([
     k.sprite("stone"),
     k.pos(x * TILESIZE, y * TILESIZE),
-    k.body({ isStatic: true }),
+    k.body({ isStatic: false }),
     k.area(),
   ])
 }

@@ -48,6 +48,10 @@ k.scene("level-01", async () => {
     music1.paused = true
   })
 
+  k.onKeyRelease("0", () => {
+    k.go("level-02")
+    music1.paused = true
+  })
   k.add([
     k.sprite("background"),
     k.pos(k.width() / 2, k.height() / 2),

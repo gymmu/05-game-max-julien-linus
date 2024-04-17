@@ -91,7 +91,6 @@ export function notesJumpAndRun(x, y) {
   k.add([
     k.sprite("notes"),
     k.pos(k.vec2(x, y).scale(TILESIZE)),
-    k.body({ isStatic: true }),
     k.area(),
     "heal",
     {

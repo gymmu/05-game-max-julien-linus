@@ -99,7 +99,18 @@ export function notesJumpAndRun(x, y) {
     },
   ])
 }
-
+export function grammyJumpAndRun(x, y) {
+  k.add([
+    k.sprite("grammy"),
+    k.pos(k.vec2(x, y).scale(TILESIZE)),
+    k.area(),
+    "heal",
+    {
+      isConsumable: true,
+      healAmount: 50,
+    },
+  ])
+}
 /**
  * Ein Spielobjekt Ziel, das vom Spieler erreicht werden muss.
  */

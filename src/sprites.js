@@ -56,6 +56,10 @@ export default function loadSprites() {
     background2: { x: 0, y: 0, width: TS, height: TS },
   })
 
+  k.loadSpriteAtlas("sprites/background3.png", {
+    background3: { x: 0, y: 0, width: TS, height: TS },
+  })
+
   k.loadSpriteAtlas("sprites/wall.png", {
     ground2: { x: 0, y: 0, width: TS, height: TS },
   })

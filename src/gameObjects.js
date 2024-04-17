@@ -65,10 +65,14 @@ export function taylorJumpAndRun(x, y) {
 
   k.add([
     k.sprite("taylor"),
-    k.pos(k.vec2(x, 7.2).scale(TILESIZE)),
+    k.pos(k.vec2(x, 8.3).scale(TILESIZE)),
     k.scale(scaleFactor),
     k.body({ isStatic: true }),
     k.area(),
+    "taylor",
+    {
+      dmgAmount: 20,
+    },
   ])
 }
 
@@ -95,7 +99,18 @@ export function notesJumpAndRun(x, y) {
     },
   ])
 }
-
+export function grammyJumpAndRun(x, y) {
+  k.add([
+    k.sprite("grammy"),
+    k.pos(k.vec2(x, y).scale(TILESIZE)),
+    k.area(),
+    "heal",
+    {
+      isConsumable: true,
+      healAmount: 50,
+    },
+  ])
+}
 /**
  * Ein Spielobjekt Ziel, das vom Spieler erreicht werden muss.
  */
@@ -133,7 +148,7 @@ export function stoneRPG(x, y) {
   k.add([
     k.sprite("stone"),
     k.pos(x * TILESIZE, y * TILESIZE),
-    k.body({ isStatic: true }),
+    k.body({ isStatic: false }),
     k.area(),
   ])
 }

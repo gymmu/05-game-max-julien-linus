@@ -63,9 +63,9 @@ export function bombJumpAndRun(x, y) {
 export function taylorJumpAndRun(x, y) {
   const scaleFactor = 3
 
-  k.add([
+  const taylor = k.add([
     k.sprite("taylor"),
-    k.pos(k.vec2(x, 8.3).scale(TILESIZE)),
+    k.pos(k.vec2(x, y).scale(TILESIZE)),
     k.scale(scaleFactor),
     k.body({ isStatic: true }),
     k.area(),
@@ -75,10 +75,6 @@ export function taylorJumpAndRun(x, y) {
     },
   ])
 }
-
-/**
- * Ein Spielobjekt Blume, das den Spieler heilt.
- */
 export function notesJumpAndRun(x, y) {
   const originalTileSize = 32
   const targetWidth = 80

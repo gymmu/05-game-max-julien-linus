@@ -67,7 +67,10 @@ export function taylorJumpAndRun(x, y) {
     k.sprite("taylor"),
     k.pos(k.vec2(x, y).scale(TILESIZE)),
     k.scale(scaleFactor),
-    k.body({ isStatic: true }),
+    k.body({
+      isStatic: false,
+      mass: 10,
+    }),
     k.area(),
     "taylor",
     {

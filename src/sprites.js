@@ -88,11 +88,11 @@ export default function loadSprites() {
   })
 
   k.loadSpriteAtlas("sprites/taylorSwift.png", {
-    taylor: { x: 6, y: 2, width: TS - 12, height: TS - 2 },
+    taylor: { x: 7, y: 2, width: TS - 12, height: TS - 2 },
   })
 
   k.loadSpriteAtlas("sprites/grammy.png", {
-    grammy: { x: 0, y: 0, width: TS, height: TS },
+    grammy: { x: 0, y: 0, width: TS - 8, height: TS },
   })
 
   k.loadSpriteAtlas("sprites/background4.png", {
@@ -105,5 +105,15 @@ export default function loadSprites() {
 
   k.loadSpriteAtlas("sprites/background6.png", {
     background6: { x: 0, y: 0, width: TS, height: TS },
+  })
+  k.loadSpriteAtlas("sprites/mic.png", {
+    mic: { x: 0, y: 0, width: TS, height: TS },
+    width: 8 * TS,
+    height: 1 * TS,
+    sliceX: 8,
+    sliceY: 1,
+    anims: {
+      idle: { from: 0, to: 7, loop: true, speed: 10 },
+    },
   })
 }

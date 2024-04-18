@@ -82,12 +82,16 @@ export default function loadSprites() {
       sliceY: 1, // In 1 verschiedene Sprites vertikal aufgeteilt
       anims: {
         // die Animation formatieren
-        explosion: { from: 0, to: 5, loop: false, speed: 15 }, // Sprite 0 bis 5 wird mit 10 FPS wiederholt
+        explosion: { from: 0, to: 5, loop: false, speed: 15 }, // Sprite 0 bis 5 wird mit 15 FPS wiederholt
       },
     },
   })
 
   k.loadSpriteAtlas("sprites/taylorSwift.png", {
     taylor: { x: 6, y: 2, width: TS - 12, height: TS - 2 },
+  })
+
+  k.loadSpriteAtlas("sprites/grammy.png", {
+    grammy: { x: 0, y: 0, width: TS, height: TS },
   })
 }

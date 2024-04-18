@@ -68,7 +68,7 @@ k.scene("level-01", async () => {
   // Lebenspunkte von dem Spieler anpassen.
   k.onUpdate(() => {
     const player = k.get("player")[0]
-    if (player.pos.y > 720) {
+    if (player.pos.y > 1500) {
       k.go("lose")
       music1.paused = true
     }

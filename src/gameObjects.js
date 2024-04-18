@@ -55,7 +55,41 @@ export function bombJumpAndRun(x, y) {
     // hat.
     {
       isConsumable: true,
-      dmgAmount: 10,
+      dmgAmount: 34,
+      knockback: 10,
+    },
+  ])
+}
+function throwMic(player) {
+  let mic = k.add([
+    k.rect(10, 10),
+    k.pos(player.pos),
+    k.area(),
+    "mic",
+    {
+      dmgAmount: 30,
+      onCollide: (obj) => {
+        if (obj.is("taylor")) {
+          obj.damage(30)
+          obj.knockback(20, 0)
+        }
+      },
+    },
+  ])
+}
+
+export function micJumpnRun(x, y) {
+  k.add([
+    k.sprite("mic"),
+    k.pos(k.vec2(x, y).scale(TILESIZE)),
+    k.area(),
+    "fight",
+    {
+      isConsumable: true,
+      dmgAmount: 50,
+      onCollide: (obj) => {
+        obj.knockback(10, 0)
+      },
     },
   ])
 }

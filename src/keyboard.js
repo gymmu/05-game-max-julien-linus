@@ -94,4 +94,7 @@ export function loadKeyboardRPG() {
   k.onKeyRelease("down", () => {
     player.play("idleDown")
   })
+  onKeyRelease("m", () => {
+    player.throwMic()
+  })
 }

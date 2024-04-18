@@ -94,4 +94,16 @@ export default function loadSprites() {
   k.loadSpriteAtlas("sprites/grammy.png", {
     grammy: { x: 0, y: 0, width: TS, height: TS },
   })
+
+  k.loadSpriteAtlas("sprites/background4.png", {
+    background4: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background5.png", {
+    background5: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background6.png", {
+    background6: { x: 0, y: 0, width: TS, height: TS },
+  })
 }

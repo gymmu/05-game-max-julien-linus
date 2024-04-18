@@ -32,6 +32,15 @@ k.scene("lose", () => {
     } else if (k.getData("level") === 3) {
       k.setData("loadData", true)
       k.go("level-03")
+    } else if (k.getData("level") === 4) {
+      k.setData("loadData", true)
+      k.go("level-04")
+    } else if (k.getData("level") === 5) {
+      k.setData("loadData", true)
+      k.go("level-05")
+    } else if (k.getData("level") === 6) {
+      k.setData("loadData", true)
+      k.go("level-06")
     }
   })
 })

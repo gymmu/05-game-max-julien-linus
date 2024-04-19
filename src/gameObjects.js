@@ -109,6 +109,7 @@ export function taylorJumpAndRun(x, y) {
     "taylor",
     {
       dmgAmount: 20,
+      speed: 50,
     },
   ])
 }
@@ -128,7 +129,7 @@ export function notesJumpAndRun(x, y) {
     "heal",
     {
       isConsumable: true,
-      healAmount: 5,
+      healAmount: 34,
     },
   ])
 }

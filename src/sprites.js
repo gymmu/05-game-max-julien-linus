@@ -88,7 +88,7 @@ export default function loadSprites() {
   })
 
   k.loadSpriteAtlas("sprites/taylorSwift.png", {
-    taylor: { x: 7, y: 2, width: TS - 12, height: TS - 2 },
+    taylor: { x: 7, y: 2, width: 20, height: 30 },
   })
 
   k.loadSpriteAtlas("sprites/grammy.png", {

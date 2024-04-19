@@ -75,6 +75,25 @@ export function addGeneralGameLogic() {
     }
   })
 
+  k.onUpdate(() => {
+    k.get("taylor").forEach((taylor) => {
+      const dir = player.pos.sub(taylor.pos)
+      dir.y = 0
+      console.log(dir.x)
+      if (dir.x > 0) {
+        taylor.flipX = true
+      }
+      if (dir.x < 0) {
+        taylor.flipX = false
+      }
+      if (Math.abs(dir.x) < 6 * TILESIZE) {
+        taylor.use(k.move(dir, taylor.speed))
+      } else {
+        taylor.unuse("move")
+      }
+    })
+  })
+
   k.onCollide("taylor", "player", (taylor, player) => {
     player.hurt(taylor.dmgAmount)
   })

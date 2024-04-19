@@ -55,9 +55,15 @@ k.scene("level-02", async () => {
     const player = k.get("player")[0]
     if (player.pos.y > 720) {
       k.go("lose")
-      music2.paused = true
+      music2.stop()
     }
   })
 
   const music2 = k.play("backgroundMusic2", { loop: true, volume: 0.5 })
+
+  const player = getPlayer()
+  player.onDeath(() => {
+    k.go("lose")
+    music2.stop()
+  })
 })

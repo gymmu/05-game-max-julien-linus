@@ -111,7 +111,7 @@ export function taylorJumpAndRun(x, y) {
     k.area(),
     "taylor",
     {
-      dmgAmount: 20,
+      dmgAmount: 120,
       speed: 50,
     },
   ])

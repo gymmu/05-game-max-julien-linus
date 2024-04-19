@@ -82,14 +82,13 @@ function throwMic(player) {
 
 export function micJumpnRun(x, y) {
   const scaleFactor = 0.7
-  const moveDirection = direction === "left" ? k.LEFT : k.RIGHT
 
   return k.add([
     k.sprite("mic"),
     k.pos(k.vec2(x, y)),
     k.scale(scaleFactor),
     k.area(),
-    k.move(k.RIGHT, 300),
+    k.move(k.RIGHT, 200),
     "mic",
     {
       dmgAmount: 50,

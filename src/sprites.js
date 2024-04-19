@@ -107,13 +107,16 @@ export default function loadSprites() {
     background6: { x: 0, y: 0, width: TS, height: TS },
   })
   k.loadSpriteAtlas("sprites/mic.png", {
-    mic: { x: 0, y: 0, width: TS, height: TS },
-    width: 8 * TS,
-    height: 1 * TS,
-    sliceX: 8,
-    sliceY: 1,
-    anims: {
-      idle: { from: 0, to: 7, loop: true, speed: 10 },
+    mic: {
+      x: 0,
+      y: 0,
+      width: 8 * TS,
+      height: 1 * TS,
+      sliceX: 8,
+      sliceY: 1,
+      anims: {
+        spin: { from: 0, to: 7, loop: true, speed: 15 },
+      },
     },
   })
 }

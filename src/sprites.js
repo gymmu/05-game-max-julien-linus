@@ -115,7 +115,7 @@ export default function loadSprites() {
       sliceX: 8,
       sliceY: 1,
       anims: {
-        spin: { from: 0, to: 7, loop: true, speed: 15 },
+        spin: { from: 0, to: 7, loop: true, speed: 30 },
       },
     },
   })

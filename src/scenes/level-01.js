@@ -1,5 +1,5 @@
 import { k, addGeneralGameLogic } from "../game.js"
-import createPlayer from "../player.js"
+import createPlayer, { getPlayer } from "../player.js"
 import { generateMapJumpAndRun } from "../map.js"
 import { loadKeyboardJumpAndRun } from "../keyboard.js"
 import "./level-02.js"
@@ -70,8 +70,14 @@ k.scene("level-01", async () => {
     const player = k.get("player")[0]
     if (player.pos.y > 1500) {
       k.go("lose")
-      music1.paused = true
+      music1.stop()
     }
   })
   const music1 = k.play("backgroundMusic", { loop: true, volume: 0.5 })
+
+  const player = getPlayer()
+  player.onDeath(() => {
+    k.go("lose")
+    music1.stop()
+  })
 })

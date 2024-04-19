@@ -75,6 +75,10 @@ export function addGeneralGameLogic() {
     }
   })
 
+  k.onCollide("mic", "taylor", (mic, taylor) => {
+    mic.destroy()
+  })
+
   k.onUpdate(() => {
     k.get("taylor").forEach((taylor) => {
       const dir = player.pos.sub(taylor.pos)

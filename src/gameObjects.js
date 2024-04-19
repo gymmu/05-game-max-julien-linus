@@ -1,5 +1,6 @@
 import { k } from "./game.js"
 import { TILESIZE } from "./globals.js"
+import "./keyboard.js"
 
 /**
  * Ein Spielobjekt das sich nicht bewegen lässt und der Spieler nicht
@@ -45,7 +46,7 @@ export function bombJumpAndRun(x, y) {
   k.add([
     k.sprite("bomb"),
     k.pos(k.vec2(x, y).scale(TILESIZE)),
-    k.body({ isStatic: true }),
+    k.body(),
     k.area(),
     "obstacle",
     "explosion",
@@ -64,6 +65,7 @@ function throwMic(player) {
   let mic = k.add([
     k.rect(10, 10),
     k.pos(player.pos),
+    k.body(),
     k.area(),
     "mic",
     {
@@ -79,17 +81,18 @@ function throwMic(player) {
 }
 
 export function micJumpnRun(x, y) {
-  k.add([
+  const scaleFactor = 0.7
+  const moveDirection = direction === "left" ? k.LEFT : k.RIGHT
+
+  return k.add([
     k.sprite("mic"),
-    k.pos(k.vec2(x, y).scale(TILESIZE)),
+    k.pos(k.vec2(x, y)),
+    k.scale(scaleFactor),
     k.area(),
-    "fight",
+    k.move(k.RIGHT, 300),
+    "mic",
     {
-      isConsumable: true,
       dmgAmount: 50,
-      onCollide: (obj) => {
-        obj.knockback(10, 0)
-      },
     },
   ])
 }

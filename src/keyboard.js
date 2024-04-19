@@ -1,6 +1,7 @@
 import { k } from "./game.js"
 import { TILESIZE } from "./globals.js"
 import { getPlayer } from "./player.js"
+import * as GameObjects from "./gameObjects.js"
 
 /**
  * Diese Funktion lädt die Tastenbelegung wie sie pro Level sein soll. Die
@@ -41,6 +42,12 @@ export function loadKeyboardJumpAndRun() {
   })
   k.onKeyRelease("space", () => {
     player.speed = 5 * TILESIZE
+  })
+  onKeyRelease("m", () => {
+    const pos = player.pos
+    const mic = micJumpnRun(pos.x, pos.y)
+    mic.play("spin")
+    console.log("mic")
   })
 }
 
@@ -93,8 +100,5 @@ export function loadKeyboardRPG() {
   })
   k.onKeyRelease("down", () => {
     player.play("idleDown")
-  })
-  onKeyRelease("m", () => {
-    player.throwMic()
   })
 }

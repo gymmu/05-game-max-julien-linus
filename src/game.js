@@ -1,4 +1,5 @@
 import kaboom from "kaboom"
+import "./gameObjects.js"
 
 /**
  *  Hier werden Funktionen aus den eigenen Datein eingebunden.
@@ -63,11 +64,13 @@ export function addGeneralGameLogic() {
 
   // Erstelle das UI-Element HP-Balken
   createHPBar()
+  createTaylorHPBar()
 
   /** Wenn der Spieler mit einem Spielobjekt mit dem Tag `heal` kollidiert, wird
    * der Spieler um `healAmount` von dem Spielobjekt geheilt. Hat das
    * Spielobjekt `isConsumable`, wird das Spielobjekt gelöscht.
    */
+
   k.onCollide("heal", "player", (heal, player) => {
     player.heal(heal.healAmount)
     if (heal.isConsumable === true) {
@@ -76,6 +79,7 @@ export function addGeneralGameLogic() {
   })
 
   k.onCollide("mic", "taylor", (mic, taylor) => {
+    taylor.hurt(mic.dmgAmount)
     mic.destroy()
   })
 
@@ -178,6 +182,54 @@ function createHPBar() {
       update() {
         const player = getPlayer()
         this.width = (player.hp() / player.max_hp) * HP_BAR_WIDTH
+      },
+    },
+  ])
+}
+
+function taylorJumpAndRun() {
+  // Return an object with the necessary properties
+  return {
+    hp: function () {
+      // Implement the logic to get the current health points of Taylor
+      return 300
+    },
+    max_hp: 300, // Assuming the maximum health points of Taylor is 100
+    width: 100, // Assuming the width of Taylor's HP bar is 100
+  }
+}
+
+function createTaylorHPBar() {
+  const taylor = taylorJumpAndRun() // Assuming you have a function to get the Taylor object
+  if (taylor == null) return
+
+  const HP_BAR_WIDTH = 100
+  const HP_BAR_HEIGHT = 10
+
+  // Dies ist das UI-Element das den Rest der dazu gehört einpackt.
+  const bar = k.add([k.pos(830, 20), k.fixed(), k.z(10), "taylor-hp-bar"])
+
+  bar.add([k.text("HP", { size: 20 }), k.anchor("right")])
+
+  bar.add([
+    k.rect(HP_BAR_WIDTH, HP_BAR_HEIGHT),
+    k.outline(4, k.RED.darken(100)), // Assuming you want the color to be red for the enemy
+    k.color(0, 0, 0),
+    k.anchor("left"),
+    k.pos(10, 0),
+  ])
+
+  // Dieser Teil zeigt den grünenden Balken an.
+  bar.add([
+    k.rect((taylor.hp() / taylor.max_hp) * HP_BAR_WIDTH, HP_BAR_HEIGHT),
+    k.color(255, 0, 0), // Assuming you want the color to be red for the enemy
+    k.anchor("left"),
+    k.pos(10, 0),
+    {
+      // Damit wird in jedem Frame überprüft ob der HP-Balken angepasst werden muss.
+      update() {
+        const taylor = taylorJumpAndRun() // Assuming you have a function to get the Taylor object
+        this.width = (taylor.hp() / taylor.max_hp) * HP_BAR_WIDTH
       },
     },
   ])

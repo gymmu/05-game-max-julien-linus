@@ -1,7 +1,7 @@
 import { k } from "./game.js"
 import { TILESIZE } from "./globals.js"
 import "./keyboard.js"
-
+import "./game.js"
 /**
  * Ein Spielobjekt das sich nicht bewegen lässt und der Spieler nicht
  * hindurch laufen kann. Kann verwendet werden um mit dem Spieler darüber zu
@@ -48,6 +48,7 @@ export function bombJumpAndRun(x, y) {
     k.pos(k.vec2(x, y).scale(TILESIZE)),
     k.body(),
     k.area(),
+    k.health(20),
     "obstacle",
     "explosion",
     // Hier können wir zusätzliche Eigenschaften von einem Spielobjekt angeben.
@@ -61,6 +62,7 @@ export function bombJumpAndRun(x, y) {
     },
   ])
 }
+
 function throwMic(player) {
   let mic = k.add([
     k.rect(10, 10),
@@ -107,6 +109,7 @@ export function taylorJumpAndRun(x, y) {
       isStatic: false,
       mass: 10,
     }),
+    k.health(300),
     k.area(),
     "taylor",
     {
@@ -115,6 +118,7 @@ export function taylorJumpAndRun(x, y) {
     },
   ])
 }
+
 export function notesJumpAndRun(x, y) {
   const originalTileSize = 32
   const targetWidth = 80

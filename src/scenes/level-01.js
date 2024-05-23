@@ -1,8 +1,7 @@
 import { k, addGeneralGameLogic } from "../game.js"
-import createPlayer from "../player.js"
+import createPlayer, { getPlayer } from "../player.js"
 import { generateMapJumpAndRun } from "../map.js"
 import { loadKeyboardJumpAndRun } from "../keyboard.js"
-
 import "./level-02.js"
 import "./lose.js"
 
@@ -20,9 +19,10 @@ import "./lose.js"
  *
  */
 k.scene("level-01", async () => {
+  k.setData("level", 1)
   // Wir stellen die Gravitation ein, damit es sich um ein Jump'n'Run-Spiel
   // handelt.
-  k.setGravity(1200)
+  k.setGravity(2200)
 
   // Wir erstellen den Spieler
   createPlayer()
@@ -45,7 +45,21 @@ k.scene("level-01", async () => {
   // kommen wir ins nächste Level.
   k.onCollide("player", "goal", () => {
     k.go("level-02")
+    music1.paused = true
   })
+
+  k.onKeyRelease("0", () => {
+    k.go("level-02")
+    music1.paused = true
+  })
+  k.add([
+    k.sprite("background"),
+    k.pos(k.width() / 2, k.height() / 2),
+    k.z(-100),
+    k.anchor("center"),
+    k.fixed(),
+    k.scale(16),
+  ])
 
   // Diese Funktion wird bei jedem Frame ausgeführt. Bei einem Jump'n'Run ist
   // es so das wenn der Spieler von einer PLattform stützt, dann hat man das
@@ -54,8 +68,16 @@ k.scene("level-01", async () => {
   // Lebenspunkte von dem Spieler anpassen.
   k.onUpdate(() => {
     const player = k.get("player")[0]
-    if (player.pos.y > 720) {
+    if (player.pos.y > 1500) {
       k.go("lose")
+      music1.stop()
     }
+  })
+  const music1 = k.play("backgroundMusic", { loop: true, volume: 0.5 })
+
+  const player = getPlayer()
+  player.onDeath(() => {
+    k.go("lose")
+    music1.stop()
   })
 })

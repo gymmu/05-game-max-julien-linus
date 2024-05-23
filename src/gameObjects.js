@@ -1,6 +1,7 @@
 import { k } from "./game.js"
 import { TILESIZE } from "./globals.js"
-
+import "./keyboard.js"
+import "./game.js"
 /**
  * Ein Spielobjekt das sich nicht bewegen lässt und der Spieler nicht
  * hindurch laufen kann. Kann verwendet werden um mit dem Spieler darüber zu
@@ -9,7 +10,7 @@ import { TILESIZE } from "./globals.js"
 export function wallJumpAndRun(x, y) {
   k.add([
     // Sagt welche Grafik verwendet werden soll.
-    k.sprite("wall"),
+    k.sprite("ground2"),
 
     // Sagt dem Spielobjekt das es eine Position auf der Spielkarte hat, und wo
     // diese ist. Die Spielposition wird mit der TILESIZE skaliert, damit alles
@@ -34,48 +35,122 @@ export function wallJumpAndRun(x, y) {
     // dann Interaktionen zwischen Spielelementen erstellt werden.
     // Zum Beispiel: onCollide("ground", "player", () => {Was soll passieren
     // wenn der Spieler den Boden berührt.})
-    "ground",
+    "ground2",
   ])
 }
 
 /**
  * Ein Pilz Spielobjekt, das dem Spieler schaden zufügt.
  */
-export function mushroomJumpAndRun(x, y) {
+export function bombJumpAndRun(x, y) {
   k.add([
-    k.sprite("mushroom"),
+    k.sprite("bomb"),
     k.pos(k.vec2(x, y).scale(TILESIZE)),
-    k.body({ isStatic: true }),
+    k.body(),
     k.area(),
+    k.health(20),
     "obstacle",
+    "explosion",
     // Hier können wir zusätzliche Eigenschaften von einem Spielobjekt angeben.
     // Mit `isConsumable` könnten wir prüfen das dieses Objekt nur
     // aufgelesen wird, wenn der Spieler die Eigenschaft `kochen` erlernt
     // hat.
     {
       isConsumable: true,
-      dmgAmount: 10,
+      dmgAmount: 34,
+      knockback: 10,
     },
   ])
 }
 
-/**
- * Ein Spielobjekt Blume, das den Spieler heilt.
- */
-export function flowerJumpAndRun(x, y) {
-  k.add([
-    k.sprite("flower"),
+function throwMic(player) {
+  let mic = k.add([
+    k.rect(10, 10),
+    k.pos(player.pos),
+    k.body(),
+    k.area(),
+    "mic",
+    {
+      dmgAmount: 30,
+      onCollide: (obj) => {
+        if (obj.is("taylor")) {
+          obj.damage(30)
+          obj.knockback(20, 0)
+        }
+      },
+    },
+  ])
+}
+
+export function micJumpnRun(x, y) {
+  const scaleFactor = 0.7
+
+  return k.add([
+    k.sprite("mic"),
+    k.pos(k.vec2(x, y)),
+    k.scale(scaleFactor),
+    k.area(),
+    k.move(k.RIGHT, 200),
+    "mic",
+    {
+      dmgAmount: 50,
+    },
+  ])
+}
+
+export function taylorJumpAndRun(x, y) {
+  const scaleFactor = 3
+
+  const taylor = k.add([
+    k.sprite("taylor"),
     k.pos(k.vec2(x, y).scale(TILESIZE)),
-    k.body({ isStatic: true }),
+    k.scale(scaleFactor),
+    k.body({
+      isStatic: false,
+      mass: 10,
+    }),
+    k.health(300),
+    k.area(),
+    "taylor",
+    {
+      dmgAmount: 120,
+      speed: 50,
+    },
+  ])
+}
+
+export function notesJumpAndRun(x, y) {
+  const originalTileSize = 32
+  const targetWidth = 80
+  const targetHeight = 48
+  const scale = Math.max(
+    targetWidth / originalTileSize,
+    targetHeight / originalTileSize,
+  )
+
+  k.add([
+    k.sprite("notes"),
+    k.pos(k.vec2(x, y).scale(TILESIZE)),
     k.area(),
     "heal",
     {
       isConsumable: true,
-      healAmount: 5,
+      healAmount: 34,
     },
   ])
 }
-
+export function grammyJumpAndRun(x, y) {
+  k.add([
+    k.sprite("grammy"),
+    k.pos(k.vec2(x, y).scale(TILESIZE)),
+    k.area(),
+    "heal",
+    {
+      isConsumable: true,
+      healAmount: 50,
+    },
+  ])
+}
 /**
  * Ein Spielobjekt Ziel, das vom Spieler erreicht werden muss.
  */
@@ -86,117 +161,5 @@ export function goalJumpAndRun(x, y) {
     k.body({ isStatic: true }),
     k.area(),
     "goal",
-  ])
-}
-
-/**
- * Ein Hintergrund Spielobjekt, das auf leeren Feldern oder als Hintergrund von
- * anderen Objekten gesetzt wird.
- */
-export function backgroundRPG(x, y) {
-  k.add([
-    k.sprite("grass"),
-    k.pos(k.vec2(x, y).scale(TILESIZE)),
-    // `z` wird hier verwendet um diese Kachel weiter im Hintergrund zu
-    // zeichnen, damit das eigentliche Spielobjekt auf dem Feld nicht
-    // überlagert wird.
-    k.z(-10),
-  ])
-}
-
-/**
- *  Spielobjekt Stein.
- *
- * Soll den Spieler blockieren.
- */
-export function stoneRPG(x, y) {
-  k.add([
-    k.sprite("stone"),
-    k.pos(x * TILESIZE, y * TILESIZE),
-    k.body({ isStatic: true }),
-    k.area(),
-  ])
-}
-
-/**
- * Spielobjekt Wand.
- *
- * Der Spieler kann hier nicht durchlaufen. Kann als Klippe verwendet werden.
- */
-export function wallRPG(x, y) {
-  k.add([
-    k.sprite("wall"),
-    k.pos(x * TILESIZE, y * TILESIZE),
-    k.body({ isStatic: true }),
-    k.area(),
-  ])
-}
-
-/**
- *  Ein Spielobjekt Höhle. Kann verwendet werden um ein neues Level zu betreten.
- */
-export function caveRPG(x, y) {
-  k.add([
-    k.sprite("cave"),
-    k.pos(x * TILESIZE, y * TILESIZE),
-    k.body({ isStatic: true }),
-    k.area(),
-    "cave",
-  ])
-}
-
-/*
- * Ein Baumstumpf als Spielobjekt. Wird als Hindernis für den Spieler
- * verwendet.
- */
-export function trunkRPG(x, y) {
-  k.add([
-    k.sprite("trunk"),
-    k.pos(x * TILESIZE, y * TILESIZE),
-    k.body({ isStatic: true }),
-    k.area(),
-  ])
-}
-
-/**
- * Ein Spielobjekt Baum. Wird als Hindernis für den Spieler verwendet.
- */
-export function treeRPG(x, y) {
-  k.add([
-    k.sprite("tree"),
-    k.pos(x * TILESIZE, y * TILESIZE),
-    k.body({ isStatic: true }),
-    k.area(),
-  ])
-}
-
-/**
- * Ein Spielobjekt Blume, das den Spieler heilt.
- */
-export function flowerRPG(x, y) {
-  k.add([
-    k.sprite("flower"),
-    k.pos(x * TILESIZE, y * TILESIZE),
-    k.area(),
-    "flower",
-    "heal",
-    {
-      isConsumable: true,
-    },
-  ])
-}
-
-/**
- * Ein Spielobjekt Pilz, das dem Spieler schadet.
- */
-export function mushroomRPG(x, y) {
-  k.add([
-    k.sprite("mushroom"),
-    k.pos(x * TILESIZE, y * TILESIZE),
-    k.area(),
-    "obstacle",
-    {
-      isConsumable: true,
-    },
   ])
 }

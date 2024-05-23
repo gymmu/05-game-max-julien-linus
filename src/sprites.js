@@ -23,7 +23,7 @@ export default function loadSprites() {
       anims: {
         // Hier werden die verschiedenen Animationen definiert.
         runDown: { from: 0, to: 2, loop: true }, // Die Animation nach unten rennen, besteht aus den ersten 3 Kacheln. Die Animation soll sich wiederholen wenn sie durchlaufen ist.
-        idleDown: 1, // Ist es nur eine Kachel, kann diese direkt angegeben werden.
+        idleDown: 19, // Ist es nur eine Kachel, kann diese direkt angegeben werden.
         runLeft: { from: 3, to: 5, loop: true, speed: 10 }, // Die Geschwindigkeit der Animation kann auch verändert werden.
         idleLeft: 4,
         runRight: { from: 6, to: 8, loop: true },
@@ -46,5 +46,77 @@ export default function loadSprites() {
     tree: { x: 1 * TS, y: 1 * TS, width: TS, height: TS },
     cave: { x: 2 * TS, y: 1 * TS, width: TS, height: TS },
     wall: { x: 3 * TS, y: 1 * TS, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background.png", {
+    background: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background2.png", {
+    background2: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background3.png", {
+    background3: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/wall.png", {
+    ground2: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/notes.png", {
+    notes: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/bomb.png", {
+    bomb: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/explosion.png", {
+    explosion: {
+      x: 0, // x-Koordinate vom Pixel wo das Sprite beginnt
+      y: 0, // y-Koordinate vom Pixel wo das Sprite beginnt
+      width: 6 * TS, // Die Breite des Sprites in Pixel
+      height: 1 * TS, //Höhe des Sprites in Pixel
+      sliceX: 6, // In 6 unterschiedliche Sprites horizontal aufgeteilt
+      sliceY: 1, // In 1 verschiedene Sprites vertikal aufgeteilt
+      anims: {
+        // die Animation formatieren
+        explosion: { from: 0, to: 5, loop: false, speed: 15 }, // Sprite 0 bis 5 wird mit 15 FPS wiederholt
+      },
+    },
+  })
+
+  k.loadSpriteAtlas("sprites/taylorSwift.png", {
+    taylor: { x: 7, y: 2, width: 20, height: 30 },
+  })
+
+  k.loadSpriteAtlas("sprites/grammy.png", {
+    grammy: { x: 0, y: 0, width: TS - 8, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background4.png", {
+    background4: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background5.png", {
+    background5: { x: 0, y: 0, width: TS, height: TS },
+  })
+
+  k.loadSpriteAtlas("sprites/background6.png", {
+    background6: { x: 0, y: 0, width: TS, height: TS },
+  })
+  k.loadSpriteAtlas("sprites/mic.png", {
+    mic: {
+      x: 0,
+      y: 0,
+      width: 8 * TS,
+      height: 1 * TS,
+      sliceX: 8,
+      sliceY: 1,
+      anims: {
+        spin: { from: 0, to: 7, loop: true, speed: 30 },
+      },
+    },
   })
 }

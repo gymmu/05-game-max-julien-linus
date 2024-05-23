@@ -43,11 +43,15 @@ export async function generateMapJumpAndRun(mapfile) {
       } else if (char === "-") {
         GameObjects.wallJumpAndRun(x, y)
       } else if (char === "o") {
-        GameObjects.mushroomJumpAndRun(x, y)
+        GameObjects.bombJumpAndRun(x, y)
       } else if (char === "f") {
-        GameObjects.flowerJumpAndRun(x, y)
+        GameObjects.notesJumpAndRun(x, y)
       } else if (char === "g") {
         GameObjects.goalJumpAndRun(x, y)
+      } else if (char === "t") {
+        GameObjects.taylorJumpAndRun(x, y)
+      } else if (char === "G") {
+        GameObjects.grammyJumpAndRun(x, y)
       }
     }
   }

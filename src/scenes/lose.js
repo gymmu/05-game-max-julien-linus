@@ -8,7 +8,7 @@ import "./level-01.js"
  */
 k.scene("lose", () => {
   const player = k.get("player")[0]
-  player.destroy()
+  player && player.destroy()
   k.add([
     k.text("Game over", { size: 44 }),
     k.pos(k.width() / 2, k.height() / 2),
@@ -24,6 +24,23 @@ k.scene("lose", () => {
   ])
 
   k.onKeyPress("space", () => {
-    k.go("level-01")
+    if (k.getData("level") === 1) {
+      k.go("level-01")
+    } else if (k.getData("level") === 2) {
+      k.setData("loadData", true)
+      k.go("level-02")
+    } else if (k.getData("level") === 3) {
+      k.setData("loadData", true)
+      k.go("level-03")
+    } else if (k.getData("level") === 4) {
+      k.setData("loadData", true)
+      k.go("level-04")
+    } else if (k.getData("level") === 5) {
+      k.setData("loadData", true)
+      k.go("level-05")
+    } else if (k.getData("level") === 6) {
+      k.setData("loadData", true)
+      k.go("level-06")
+    }
   })
 })

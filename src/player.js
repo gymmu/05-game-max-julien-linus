@@ -15,10 +15,10 @@ export default function createPlayer() {
     k.pos(0, 0),
     k.body(),
     k.area(),
-
+    k.doubleJump(),
     // Gibt dem Spieler Lebenspunkte und die möglichkeit über die Funktionen
     // `hurt` und `heal` mit dem Spieler zu interagieren.
-    k.health(50),
+    k.health(100),
 
     // Damit wird der Spieler nicht zerstört wenn die Szene gewechselt wird.
     // Der Spieler muss dann aber bei GameOver und ähnlichen Szenen von

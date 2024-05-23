@@ -1,4 +1,5 @@
 import kaboom from "kaboom"
+import "./gameObjects.js"
 
 /**
  *  Hier werden Funktionen aus den eigenen Datein eingebunden.
@@ -10,6 +11,8 @@ import kaboom from "kaboom"
  * Funktion auch ohne `{}`-Klammer importiert werden.
  */
 import loadSprites from "./sprites.js"
+
+import { loadSounds } from "./sounds.js"
 
 /**
  * Wir können auch einzelne Variablen importieren.
@@ -46,6 +49,8 @@ export const k = kaboom({
  */
 loadSprites()
 
+loadSounds()
+
 /**
  * Diese Funktion erstellt die generelle Spiellogik die in allen Levels gilt.
  *
@@ -59,16 +64,46 @@ export function addGeneralGameLogic() {
 
   // Erstelle das UI-Element HP-Balken
   createHPBar()
+  createTaylorHPBar()
 
   /** Wenn der Spieler mit einem Spielobjekt mit dem Tag `heal` kollidiert, wird
    * der Spieler um `healAmount` von dem Spielobjekt geheilt. Hat das
    * Spielobjekt `isConsumable`, wird das Spielobjekt gelöscht.
    */
+
   k.onCollide("heal", "player", (heal, player) => {
     player.heal(heal.healAmount)
     if (heal.isConsumable === true) {
       heal.destroy()
     }
+  })
+
+  k.onCollide("mic", "taylor", (mic, taylor) => {
+    taylor.hurt(mic.dmgAmount)
+    mic.destroy()
+  })
+
+  k.onUpdate(() => {
+    k.get("taylor").forEach((taylor) => {
+      const dir = player.pos.sub(taylor.pos)
+      dir.y = 0
+      console.log(dir.x)
+      if (dir.x > 0) {
+        taylor.flipX = true
+      }
+      if (dir.x < 0) {
+        taylor.flipX = false
+      }
+      if (Math.abs(dir.x) < 6 * TILESIZE) {
+        taylor.use(k.move(dir, taylor.speed))
+      } else {
+        taylor.unuse("move")
+      }
+    })
+  })
+
+  k.onCollide("taylor", "player", (taylor, player) => {
+    player.hurt(taylor.dmgAmount)
   })
 
   /**
@@ -81,6 +116,16 @@ export function addGeneralGameLogic() {
     if (obstacle.isConsumable === true) {
       obstacle.destroy()
     }
+
+    const explosion = k.add([
+      k.sprite("explosion", { anim: "explosion" }),
+      k.pos(obstacle.pos.x, obstacle.pos.y),
+      k.scale(1.5),
+      "explosion",
+    ])
+    k.wait(0.6, () => {
+      explosion.destroy()
+    })
   })
 
   /** Wenn der Spieler geheilt wird, dann wird seine Geschwindigkeit für 1
@@ -137,6 +182,54 @@ function createHPBar() {
       update() {
         const player = getPlayer()
         this.width = (player.hp() / player.max_hp) * HP_BAR_WIDTH
+      },
+    },
+  ])
+}
+
+function taylorJumpAndRun() {
+  // Return an object with the necessary properties
+  return {
+    hp: function () {
+      // Implement the logic to get the current health points of Taylor
+      return 300
+    },
+    max_hp: 300, // Assuming the maximum health points of Taylor is 100
+    width: 100, // Assuming the width of Taylor's HP bar is 100
+  }
+}
+
+function createTaylorHPBar() {
+  const taylor = taylorJumpAndRun() // Assuming you have a function to get the Taylor object
+  if (taylor == null) return
+
+  const HP_BAR_WIDTH = 100
+  const HP_BAR_HEIGHT = 10
+
+  // Dies ist das UI-Element das den Rest der dazu gehört einpackt.
+  const bar = k.add([k.pos(830, 20), k.fixed(), k.z(10), "taylor-hp-bar"])
+
+  bar.add([k.text("HP", { size: 20 }), k.anchor("right")])
+
+  bar.add([
+    k.rect(HP_BAR_WIDTH, HP_BAR_HEIGHT),
+    k.outline(4, k.RED.darken(100)), // Assuming you want the color to be red for the enemy
+    k.color(0, 0, 0),
+    k.anchor("left"),
+    k.pos(10, 0),
+  ])
+
+  // Dieser Teil zeigt den grünenden Balken an.
+  bar.add([
+    k.rect((taylor.hp() / taylor.max_hp) * HP_BAR_WIDTH, HP_BAR_HEIGHT),
+    k.color(255, 0, 0), // Assuming you want the color to be red for the enemy
+    k.anchor("left"),
+    k.pos(10, 0),
+    {
+      // Damit wird in jedem Frame überprüft ob der HP-Balken angepasst werden muss.
+      update() {
+        const taylor = taylorJumpAndRun() // Assuming you have a function to get the Taylor object
+        this.width = (taylor.hp() / taylor.max_hp) * HP_BAR_WIDTH
       },
     },
   ])
